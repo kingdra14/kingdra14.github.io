@@ -4,7 +4,7 @@ setTimeout(() => {
 h1.textContent = 'Welcome to my page ;)'
 },5000)
 
-const welcome = document.querySelector('#welcome h3')
+ const welcome = document.querySelector('#welcome h3')
 const hours = new Date().getHours() // get the current hour
 
 const isMorning = hours >= 4 && hours < 12 // is it morning?
@@ -18,4 +18,7 @@ else if (isAfternoon) {
     
 } else {
     welcome.textContent ="Good Evening"
-}
+} 
+
+
+localStorage.setItem('It\'s a secret to everybody', 'Whats up doc?')
