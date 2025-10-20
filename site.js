@@ -57,8 +57,69 @@ btnPrev.addEventListener('click',() =>
     showImages()
 })
 
-
 setInterval(() => {
     currentImage ++
     showImages()
 }, 5000)
+
+// Todo List
+const input = document.querySelector('#new-todo')
+const addButton = document.querySelector('#addButton')
+const todoList = document.querySelector('.todo-list')
+// Get the list from local storage
+const todos = JSON.parse(localStorage.getItem('todo-list')) || []
+
+
+// Arrow function to render todos
+const renderTodos = () => {
+  // Clear existing list items
+  todoList.innerHTML = ''
+
+  // Loop through todos and create list items
+  todos.forEach(todo => {
+    const li = document.createElement('li')
+    li.textContent = todo.text
+    todoList.append(li)
+  });
+};
+
+
+// Event listener for adding new todo
+addButton.addEventListener('click', () => {
+  const text = input.value.trim()
+  if (text !== '') {
+    // Add new todo to array
+    todos.push({ text: text, completed: false })
+
+    // Save updated todos 
+     localStorage.setItem('todo-list', JSON.stringify(todos))
+
+// Clear input field
+    input.value = ''
+
+
+    // Re-render the list
+    renderTodos()
+  }
+
+
+});
+
+
+// Initial render on page load
+renderTodos();
+
+/* // Add a new item to the list
+todos.push({ text: input.value, completed: false })
+
+// Save the list to local storage
+localStorage.setItem('todo-list', JSON.stringify(todos))
+
+// Clear the li's before we recreate them
+todoList.innerHTML = ''
+
+// Create and add new list items to the DOM
+const li = document.createElement('li')
+li.textContent = todo.text
+todoList.append(li)
+ */
