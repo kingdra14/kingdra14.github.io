@@ -123,3 +123,36 @@ const li = document.createElement('li')
 li.textContent = todo.text
 todoList.append(li)
  */
+
+// Pokemon Section
+const getRandomPokemon = async () => {
+    const url = 'https://pokeapi.co/api/v2/pokemon/' + Math.floor(Math.random() * 150)
+    try{
+    const response = await fetch(url)
+    const data = await response.json()
+    return data
+    } catch (error) {
+        console.error('Error fetching Pokemon:', error)
+    }
+}
+// Render Pokemon
+const renderPokemon = (pokemon) => {
+    const pokemonDiv = document.querySelector('.pokemon')
+    pokemonDiv.innerHTML = ''
+
+    const img = document.createElement('img')
+    img.src = pokemon.sprites.front_default
+    img.alt = pokemon.name
+    pokemonDiv.append(img)
+    const name = document.createElement('h2')
+    name.textContent = pokemon.name.charAt(0).toUpperCase() + pokemon.name.slice(1)
+    pokemonDiv.append(name)
+
+    return pokemon
+
+}
+
+(async () => {
+  const pokemon = await getRandomPokemon();
+    renderPokemon(pokemon);
+})();
